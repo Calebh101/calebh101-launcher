@@ -1,0 +1,70 @@
+name: launcher
+description: "A Flutter project with localpkg."
+publish_to: 'none'
+version: 0.0.0+1
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  archive: ^4.0.2
+  flutter:
+    sdk: flutter
+
+  http: ^1.3.0
+  localpkg:
+    git:
+      url: https://github.com/Calebh101/localpkg-flutter.git
+      ref: main
+  quick_navbar: ^1.2.0
+  shared_preferences: ^2.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.2
+  flutter_native_splash: ^2.4.4
+
+flutter: 
+  uses-material-design: true
+
+flutter_native_splash:
+  color: "#000000"
+  image: assets/icon/splash.png
+
+flutter_launcher_icons:
+  image_path: "assets/icon/icon.png"
+
+  android: "launcher_icon"
+  min_sdk_android: 21
+
+  ios: true
+  remove_alpha_ios: true
+  image_path_ios_dark_transparent: "assets/icon/icondark.png"
+  image_path_ios_tinted_grayscale: "assets/icon/icontint.png"
+  desaturate_tinted_to_grayscale_ios: true
+
+  web:
+    generate: true
+    image_path: "assets/icon/icon.png"
+    background_color: "#000000"
+    theme_color: "#000000"
+
+  windows:
+    generate: true
+    image_path: "assets/icon/splash.png"
+    icon_size: 48
+
+  macos:
+    generate: true
+    image_path: "assets/icon/icon.png"
+
+# Commands:
+  # flutter_launcher_icons: dart run flutter_launcher_icons
+  # flutter_native_splash: dart run flutter_native_splash:create
+
+# Resources:
+  # Android versioning: https://developer.android.com/studio/publish/versioning
+  # Apple versioning: https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
