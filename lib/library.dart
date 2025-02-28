@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_environments_plus/flutter_environments_plus.dart';
 import 'package:launcher/view.dart';
-import 'package:localpkg/environment.dart';
 import 'package:localpkg/functions.dart';
 import 'package:localpkg/online.dart';
 import 'package:localpkg/logger.dart';
@@ -32,7 +32,7 @@ class _LibraryState extends State<Library> {
   
     for (Map app in apps) {
       String name = app["id"];
-      String environment = Environment.get();
+      String environment = "${Environment.get()}";
       List platforms = app["platforms"] ?? [];
       Map urls = app["url"] ?? {};
       bool supported = platforms.contains(environment);

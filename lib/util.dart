@@ -1,21 +1,21 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:localpkg/environment.dart';
+import 'package:flutter_environments_plus/flutter_environments_plus.dart';
 import 'package:localpkg/error.dart';
 import 'package:localpkg/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-String divider = Environment.windows ? "\\" : "/";
+String divider = Environment.isWindows ? "\\" : "/";
 Map processes = {};
 
 String getExtension(String type) {
   switch (type) {
     case 'app':
-      if (Environment.windows) {
+      if (Environment.isWindows) {
         return 'exe';
-      } else if (Environment.macos) {
+      } else if (Environment.isMacos) {
         return 'app';
-      } else if (Environment.linux) {
+      } else if (Environment.isLinux) {
         return 'app';
       } else {
         throw ManualError("Invalid environment");
@@ -26,11 +26,11 @@ String getExtension(String type) {
 }
 
 String getPath(String name) {
-  if (Environment.linux) {
+  if (Environment.isLinux) {
     return "/etc/calebh101/$name";
-  } else if (Environment.windows) {
+  } else if (Environment.isWindows) {
     return "C:\\Program Files\\Calebh101\\$name";
-  } else if (Environment.macos) {
+  } else if (Environment.isMacos) {
     return "/usr/local/calebh101/$name";
   } else {
     throw ManualError("Invalid environment");

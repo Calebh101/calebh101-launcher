@@ -3,9 +3,9 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_environments_plus/flutter_environments_plus.dart';
 import 'package:launcher/util.dart';
 import 'package:localpkg/dialogue.dart';
-import 'package:localpkg/environment.dart';
 import 'package:localpkg/functions.dart';
 import 'package:localpkg/online.dart';
 import 'package:localpkg/logger.dart';
@@ -53,7 +53,7 @@ class _ViewPageState extends State<ViewPage> {
   }
 
   Future<void> install({required int mode, required Map data}) async {
-    Map response = await installAction(item: widget.item, version: data["version"], mode: mode, path: getPath(widget.item["id"]), url: widget.item["url"][Environment.get()]);
+    Map response = await installAction(item: widget.item, version: data["version"], mode: mode, path: getPath(widget.item["id"]), url: widget.item["url"]["${Environment.get()}"]);
     if (response["success"] == false) {
       String e = response["error"];
       print("error (${e.runtimeType}): $e");
@@ -165,7 +165,7 @@ class _ViewPageState extends State<ViewPage> {
                     List environments = [];
 
                     for (String platform in platforms) {
-                      environments.add(Environment.format(platform));
+                      environments.add(platform);
                     }
 
                     String data = environments.join(', ');
