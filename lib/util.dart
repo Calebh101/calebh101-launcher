@@ -70,25 +70,7 @@ Future<String?> getExec({required String name, required String path}) async {
 }
 
 Future<Map?> getConfig(Map item) async {
-  String name = item["id"];
-  String? path = item['path'] ?? getPath(name);
-  print("getting config for $name ($path)...");
-  if (await checkInstalled(name) && path != null) {
-    String pathS = "$path/config.json";
-    print("getting config at $pathS for $name...");
-    try {
-      final file = File(pathS);
-      String contents = await file.readAsString();
-      Map data = json.decode(contents);
-      print("config: $data");
-      return data;
-    } catch (e) {
-      print("config: error reading $path: $e");
-      return null;
-    }
-  } else {
-    return null;
-  }
+  return item;
 }
 
 Future<String?> getInstalledVer(Map item) async {

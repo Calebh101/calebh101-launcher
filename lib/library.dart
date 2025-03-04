@@ -26,7 +26,7 @@ class _LibraryState extends State<Library> {
       return prevData;
     }
   
-    Map data = await getServerData(endpoint: "catalog/apps", method: 'GET');
+    Map data = await getServerData(endpoint: "catalog/query?type=application", method: 'GET');
     List apps = data["catalog"];
     List catalog = [];
   

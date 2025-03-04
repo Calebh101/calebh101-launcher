@@ -343,14 +343,6 @@ class _ViewPageState extends State<ViewPage> {
           }
         }
 
-        Map config = {
-          "version": version,
-        };
-
-        updateLoading(60);
-        File file = File('$path/config.json');
-        await file.writeAsString(jsonEncode(config));
-
         if (mode == 1) {
           print("setting prefs...");
           json.add({"name": item["name"], "id": item["id"], 'path': path, 'version': version});
