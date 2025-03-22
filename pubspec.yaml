@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   archive: ^4.0.2
+  device_info_plus: ^11.3.3
   flutter:
     sdk: flutter
 
@@ -19,6 +20,7 @@ dependencies:
       ref: main
   quick_navbar: ^1.2.0
   shared_preferences: ^2.5.1
+  system_info2: ^4.0.0
 
 dev_dependencies:
   flutter_test:

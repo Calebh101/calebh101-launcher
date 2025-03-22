@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_environments_plus/flutter_environments_plus.dart';
+import 'package:launcher/main.dart';
 import 'package:launcher/view.dart';
 import 'package:localpkg/functions.dart';
 import 'package:localpkg/online.dart';
@@ -32,13 +32,11 @@ class _LibraryState extends State<Library> {
   
     for (Map app in apps) {
       String name = app["id"];
-      String environment = "${Environment.get()}";
+      String environment = await getCurrentPlatform();
       List platforms = app["platforms"] ?? [];
-      Map urls = app["url"] ?? {};
       bool supported = platforms.contains(environment);
-      bool url = urls.containsKey(environment) && urls[environment] != null;
-      print("app $name status: $supported:$url (${supported && url}) (environment: $environment)");
-      if (supported && url) {
+      print("app $name status: $supported (environment: $environment)");
+      if (supported) {
         catalog.add(app);
       }
     }
@@ -73,7 +71,7 @@ class _LibraryState extends State<Library> {
                     ),
                     child: ListTile(
                       title: Text("${item["name"]}"),
-                      subtitle: Text("${item["summary"]}\nVersion: ${item["version"]}\nCategories: ${item["categories"].join(', ')}"),
+                      subtitle: Text("${item["summary"]}"),
                       onTap: () {
                         navigate(context: context, page: ViewPage(item: item));
                       },
@@ -85,11 +83,14 @@ class _LibraryState extends State<Library> {
           } else {
             String snapshotError = "${snapshot.error ?? "no data"}";
             bool noData = snapshotError.toLowerCase() == "no data";
+            print("received data: $noData");
+
             if (noData) {
               warn("snapshot error: $snapshotError");
             } else {
               error("snapshot error: $snapshotError");
             }
+
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Center(child: Column(
