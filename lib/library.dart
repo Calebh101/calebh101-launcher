@@ -70,7 +70,7 @@ class _LibraryState extends State<Library> {
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                     ),
                     child: ListTile(
-                      title: Text("${item["name"]}"),
+                      title: Text("${item["name"]} V. ${item["version"]}${item["beta"] ? " Beta" : ""}"),
                       subtitle: Text("${item["summary"]}"),
                       onTap: () {
                         navigate(context: context, page: ViewPage(item: item));

@@ -66,6 +66,7 @@ Future<String?> getExec({required String name, required String path}) async {
       return file;
     }
   }
+
   return null;
 }
 
@@ -97,7 +98,8 @@ Future<Map> runProcess(String command, {List<String>? args}) async {
 Future<Map> playApp({required String name, required String path}) async {
   String? command;
   List commands = [];
-  String file = '$path/${await getExec(name: name, path: path)}';
+  String? exec = await getExec(name: name, path: path);
+  String file = '$path/$exec';
   List<String> args = ['--launcher=true'];
   FileStat stat = await FileStat.stat(file);
 
@@ -110,6 +112,10 @@ Future<Map> playApp({required String name, required String path}) async {
       response["command"] = command;
     }
     return response;
+  }
+
+  if (exec == null) {
+    return end(false, error: "No executable found.");
   }
 
   if (stat.mode & 0x49 != 0) {
